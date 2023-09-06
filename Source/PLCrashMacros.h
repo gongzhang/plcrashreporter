@@ -141,7 +141,7 @@
 #endif /* PLCR_PRIVATE */
 
 #ifdef PLCR_PRIVATE
-#  if TARGET_OS_MACCATALYST
+#  if TARGET_OS_MACCATALYST || TARGET_OS_VISION
 #    include <os/log.h>
 #    define PLCR_LOG(msg, args...) os_log(OS_LOG_DEFAULT, "[PLCrashReporter] "  msg, ## args)
 #  else

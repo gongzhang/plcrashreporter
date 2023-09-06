@@ -384,7 +384,7 @@ plcrash_error_t plcrash_log_writer_init (plcrash_log_writer_t *writer,
     /* Fetch the machine information */
     {
         /* Model */
-#if TARGET_OS_IPHONE && !TARGET_OS_MACCATALYST
+#if (TARGET_OS_IPHONE || TARGET_OS_VISION) && !TARGET_OS_MACCATALYST
         /* On iOS, we want hw.machine (e.g. hw.machine = iPad2,1; hw.model = K93AP) */
         char *model = plcrash_sysctl_string("hw.machine");
 #else
@@ -456,7 +456,7 @@ plcrash_error_t plcrash_log_writer_init (plcrash_log_writer_t *writer,
     }
     plprotobuf_cbinary_data_string_init(&writer->system_info.build, build);
 
-#if TARGET_OS_IPHONE || TARGET_OS_MAC
+#if TARGET_OS_IPHONE || TARGET_OS_VISION || TARGET_OS_MAC
     /* iOS, tvOS, macOS and Mac Catalyst */
     {
         NSProcessInfo *processInfo = [NSProcessInfo processInfo];
